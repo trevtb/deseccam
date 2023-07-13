@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ "$1" = "remove" ]; then
+rm /usr/bin/deseccam/*.pyc
+rm -R /var/log/deseccam/*
+update-rc.d -f deseccam remove
+deluser --quiet desec
+fi

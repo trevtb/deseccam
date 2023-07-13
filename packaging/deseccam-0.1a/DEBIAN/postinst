@@ -1,0 +1,26 @@
+#!/bin/bash
+
+
+
+case "${1}" in
+(configure)
+    adduser --system --shell /bin/bash --no-create-home --quiet desec
+    usermod -a -G adm,video desec
+    chown -R desec:adm /etc/deseccam
+    chown -R desec:adm /var/log/deseccam
+    chown -R desec:adm /usr/bin/deseccam
+    chmod +x /etc/init.d/deseccam
+    chmod +x /usr/bin/deseccam/deseccam.py
+    read -p "Please enter the full path to your python binary: " -e -i "/home/pi/.virtualenvs/cv/bin/python" pypath
+    sed -i "s#mypythonpath#${pypath}#g" /etc/init.d/deseccam
+    update-rc.d -f deseccam defaults
+    ${pypath} -m compileall -l /usr/bin/deseccam/
+    echo "Please restart your machine for the changes to take effect."
+    ;;
+(abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+(*)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac

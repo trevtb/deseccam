@@ -1,0 +1,9 @@
+Package: deseccam
+Version: 0.1a
+Architecture: all
+Maintainer: DATA EVOLUTION UG (haftungsbeschränkt) <info@dataevolution.de>
+Depends: python2.7
+Installed-Size: 64
+Homepage: http://www.dataevolution.de/security
+Description: Camera unit for the DESEC security system.
+ This is the camera unit software for the DESEC security system. It needs a virtual environment with OpenCV compiled to run.
